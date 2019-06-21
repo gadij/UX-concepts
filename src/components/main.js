@@ -58,7 +58,7 @@ class Main extends React.Component {
                 this is the payment method: ${JSON.stringify(paymentDetails)}`)
         history.push('/order');
     }
-    render() {
+    render() { // TODO: add back navigation button
         const { userDetails, orderDetail, paymentDetails } = this.state;
         return (
             <div className='main'>

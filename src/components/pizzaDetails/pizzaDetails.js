@@ -49,7 +49,7 @@ class PizzaDetails extends React.Component {
         this.handleOrderChange('topings', values);
     }
 
-    render() {
+    render() { // TODO: multi select component is not working, selected it not displayed
         const { pizzaDetails: { dough = '' } } = this.props
         return (
             <section className='wrapper'>
