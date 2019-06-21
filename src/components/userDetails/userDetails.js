@@ -10,7 +10,7 @@ class UserDetails extends React.Component {
 
     handleUserDetailsChange(type, value) {
         const { onUserDetailsChange } = this.props;
-        onUserDetailsChange({[type]: value});
+        onUserDetailsChange({ [type]: value });
     }
 
     onNameChange(event) {
@@ -27,28 +27,28 @@ class UserDetails extends React.Component {
     }
 
     render() {
-        const { userDetails: {name = '', city = '', address = ''} } = this.props;
+        const { userDetails: { name = '', city = '', address = '' } } = this.props;
         return (
-            <React.Fragment>
-                <div className="content">
+            <section className='wrapper'>
+                <section className="content">
                     <label>
                         Name:
                     </label>
                     <input type="text" name="name" value={name} onChange={this.onNameChange} />
-                </div>
-                <div className="content">
+                </section>
+                <section className="content">
                     <label>
                         City:
                     </label>
                     <input type="text" name="city" value={city} onChange={this.onCityChange} />
-                </div>
-                <div className="content">
+                </section>
+                <section className="content">
                     <label>
                         Address:
                     </label>
                     <input type="text" name="address" value={address} onChange={this.onStreatAddressChange} />
-                </div>
-            </React.Fragment>
+                </section>
+            </section>
         )
     }
 }

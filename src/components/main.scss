@@ -1,6 +1,10 @@
 body {
     height: min-content;
     margin: 0;
+    height: 100%;
+    div#index{
+        height: 100%;
+    }
     .main {
         background-color: crimson; 
         height: 100%;
@@ -23,24 +27,33 @@ body {
                 text-shadow: -5px 5px 5px crimson;
             }
             .logo {
-                content: url(../assets/5743-256x256x32.png);
+                content: url(../../assets/5743-256x256x32.png);
                 width: 62px;
                 height: 100%;
                 margin: 0 20px 0 40;
             }
         }
-        .content {
+        div.content {
             padding: 10px 0;
+            height: calc(100% - 98px);
             section {
                 background-color: gold;
                 border-radius: 10px;
                 margin: 10px 5px;
                 padding: 10px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                justify-content: space-between;
                 @media screen and (max-width: 420px) {
                     display: flex;
                     flex-direction: column;   
                 }
             }
+        }
+        .wrapper {
+            min-height: 300px;
+            box-shadow: 4px 4px 4px 0px darkkhaki;
         }
     }
     

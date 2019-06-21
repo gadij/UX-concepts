@@ -52,20 +52,20 @@ class PizzaDetails extends React.Component {
     render() {
         const { pizzaDetails: { dough = '' } } = this.props
         return (
-            <form className="form">
-                <div className="content">
+            <section className='wrapper'>
+                <section className="content">
                     <label>
                         Dough:
                     </label>
                     <input type="text" name="dough" value={dough} onChange={this.doughChange} />
-                </div>
-                <div className="topings content">
+                </section>
+                <section className="topings content">
                     <label>
                         Topings:
                     </label>
                     <Multiselect options={optionsForTopings} onSelectOptions={this.onTopingsChange} />
-                </div>
-            </form>
+                </section>
+            </section>
         )
     }
 }

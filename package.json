@@ -1,6 +1,6 @@
 {
   "name": "react-app",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "create react app with UX principles",
   "main": "index.js",
   "author": "gadi j.",
@@ -27,6 +27,8 @@
     "multiselect-dropdown-react": "^1.0.5",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1"
   }
 }
