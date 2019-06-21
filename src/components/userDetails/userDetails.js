@@ -3,57 +3,38 @@ import React from "react";
 class UserDetails extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: '',
-            address: {
-                city: '',
-                streatAddress: ''
-            }
-        };
-        this.nameChange = this.nameChange.bind(this);
+        this.onNameChange = this.onNameChange.bind(this);
         this.onStreatAddressChange = this.onStreatAddressChange.bind(this);
         this.onCityChange = this.onCityChange.bind(this);
-        this.formAction = this.formAction.bind(this);
     }
 
-    formAction(event) {
-        event.preventDefault();
-        console.log(`Name: ${this.state.name}`)
-        console.log(`Address: ${JSON.stringify(this.state.address)}`)
+    handleUserDetailsChange(type, value) {
+        const { onUserDetailsChange } = this.props;
+        onUserDetailsChange({[type]: value});
     }
 
-    nameChange(event) {
-        this.setState({
-            name: event.target.value
-        })
+    onNameChange(event) {
+        this.handleUserDetailsChange('name', event.target.value);
     }
 
     onCityChange(event) {
-        let {address} = this.state;
-        address.city = event.target.value;
-        this.setState({
-            address
-        });
+        this.handleUserDetailsChange('city', event.target.value);
+
     }
 
     onStreatAddressChange(event) {
-        let {address} = this.state;
-        address.streatAddress = event.target.value;
-        this.setState({
-            address
-        });
+        this.handleUserDetailsChange('address', event.target.value);
     }
 
     render() {
-        const { name, address = {} } = this.state;
-        const { city, streatAddress } = address;
+        const { userDetails: {name = '', city = '', address = ''} } = this.props;
         return (
-            <form className="form">
+            <React.Fragment>
                 <div className="content">
                     <label>
                         Name:
                     </label>
-                    <input type="text" name="name" value={name} onChange={this.nameChange} />
+                    <input type="text" name="name" value={name} onChange={this.onNameChange} />
                 </div>
                 <div className="content">
                     <label>
@@ -65,10 +46,9 @@ class UserDetails extends React.Component {
                     <label>
                         Address:
                     </label>
-                    <input type="text" name="address" value={streatAddress} onChange={this.onStreatAddressChange} />
+                    <input type="text" name="address" value={address} onChange={this.onStreatAddressChange} />
                 </div>
-                <input type="submit" value="Submit" onClick={this.formAction} />
-            </form>
+            </React.Fragment>
         )
     }
 }

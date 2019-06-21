@@ -5,13 +5,15 @@ import { UserDetails } from './components'
 import { PizzaDetails } from './components'
 
 import './index.scss';
+import PaymentDetails from "./components/payment/paymentDetails";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.submitOrder = this.submitOrder.bind(this);
-    this.onUserDetailsChange = this.onUserDetailsChange.bind(this);
-    this.onPizzaDetailsChange = this.onPizzaDetailsChange.bind(this);
+    this.handleUserDetailsChange = this.handleUserDetailsChange.bind(this);
+    this.handlePizzaDetailsChange = this.handlePizzaDetailsChange.bind(this);
+    this.handlePaymentDetailsChange = this.handlePaymentDetailsChange.bind(this);
     this.state = {
       orderDetail: {
         dough: '',
@@ -19,46 +21,74 @@ class App extends React.Component {
       },
       userDetails: {
         name: '',
-        address: {
-            city: '',
-            streatAddress: ''
-        }
+        city: '',
+        address: ''
+      },
+      paymentDetails: {
+        cardNumber: '',
+        valid: '',
+        cvv: ''
       }
     }
   }
 
-  onUserDetailsChange(userDetails) {
-    const { name, address: { city, streatAddress} } = this.state.userDetails;
-    
-  }
-  onPizzaDetailsChange(pizzaDetails) {
-    const { orderDetail } = this.state;
-    
-  }
-  submitOrder() {
+  handleUserDetailsChange(newDetails) {
+    const { userDetails } = this.state;
+    const merged = Object.assign(userDetails, newDetails);
+    this.setState({ userDetails: merged });
 
+  }
+  handlePizzaDetailsChange(newPizzaDetails) {
+    const { orderDetail } = this.state;
+    const merged = Object.assign(orderDetail, newPizzaDetails);
+    this.setState({ orderDetail: merged });
+  }
+
+  handlePaymentDetailsChange(newPaymentDetails) {
+    const { paymentDetails } = this.state;
+    const merged = Object.assign(paymentDetails, newPaymentDetails);
+    this.setState({ paymentDetails: merged });
+  }
+
+  submitOrder(event) {
+    event.preventDefault();
+    const { orderDetail, userDetails, paymentDetails } = this.state;
+    console.log(`this is your detail: ${JSON.stringify(userDetails)}
+                this is your order: ${JSON.stringify(orderDetail)}
+                this is the payment method: ${JSON.stringify(paymentDetails)}`)
   }
   render() {
-
+    const { userDetails, orderDetail, paymentDetails } = this.state;
     return (
       <div className='main'>
         <h1>
           <label>
-              Pizza Party
+            Pizza Party
             </label>
           <span className='logo'></span>
         </h1>
         <div className='content'>
-          <section>
-            <UserDetails />
-          </section>
-          <section>
-            <PizzaDetails/>
-          </section>
-          <button onClick={this.submitOrder}/>
+          <form className="form">
+            <section>
+              <UserDetails
+                userDetails={userDetails}
+                onUserDetailsChange={this.handleUserDetailsChange} />
+            </section>
+            <section>
+              <PizzaDetails
+                pizzaDetails={orderDetail}
+                onPizzaDetailsChange={this.handlePizzaDetailsChange} />
+            </section>
+            <section>
+              <PaymentDetails
+                paymentDetails={paymentDetails}
+                onPaymentDetailsChange={this.handlePaymentDetailsChange} />
+            </section>
+            <input type="submit" value="Submit" onClick={this.submitOrder} />
+          </form>
         </div>
-    </div>
-  );
+      </div>
+    );
 
   }
 };

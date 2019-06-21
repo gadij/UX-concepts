@@ -1,6 +1,5 @@
 import React from "react";
 import Multiselect from 'multiselect-dropdown-react';
-import '../style/form.scss';
 
 const optionsForTopings = [
     {
@@ -32,40 +31,26 @@ const optionsForTopings = [
 class PizzaDetails extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            dough: '',
-            topings: []
-        }
         this.doughChange = this.doughChange.bind(this);
         this.onTopingsChange = this.onTopingsChange.bind(this);
-        this.formAction = this.formAction.bind(this);
     }
 
-    formAction(event) {
-        event.preventDefault();
-        console.log(`Dough: ${this.state.dough}`)
-        console.log(`Topings: ${this.state.topings}`)
+    
+    handleOrderChange(type, value) {
+        const { onPizzaDetailsChange } = this.props;
+        onPizzaDetailsChange({[type]: value});
     }
-
+    
     doughChange(event) {
-        this.setState({
-            dough: event.target.value
-        })
+        this.handleOrderChange('dough', event.target.value);
     }
 
     onTopingsChange(values) {
-        // const value = event.target.value;
-        // const topings = this.state.topings;
-        // if (topings.find((item) => {
-        //     item !== value
-        //     topings.push(value);
-        // }))
-        this.setState({ topings: values });
+        this.handleOrderChange('topings', values);
     }
 
     render() {
-        // const { formAction } = this.props
-        const { dough, topings } = this.state
+        const { pizzaDetails: { dough = '' } } = this.props
         return (
             <form className="form">
                 <div className="content">
@@ -79,9 +64,7 @@ class PizzaDetails extends React.Component {
                         Topings:
                     </label>
                     <Multiselect options={optionsForTopings} onSelectOptions={this.onTopingsChange} />
-                    {/* <input type="text" name="topings" value={topings} onChange={this.topingsChange} /> */}
                 </div>
-                <input type="submit" value="Submit" onClick={this.formAction} />
             </form>
         )
     }
