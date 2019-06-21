@@ -1,0 +1,12 @@
+.fillBar {
+    width: 200px;
+    // border-top-left-radius: 50%;
+    // border-bottom-left-radius: 50%;
+    // border-top-right-radius: 50%;
+    // border-bottom-right-radius: 50%;
+    // border-start-end-radius: 50%;
+    border-radius: 50px;
+    height: 20px;
+    // background: lightblue;
+    background-image: linear-gradient(to right, green 35%, yellow 30%, red 35%);
+}

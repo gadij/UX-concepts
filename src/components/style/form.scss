@@ -1,0 +1,29 @@
+@import "multiSelection.scss";
+
+form.form {
+    display: flex;
+    @media screen and (max-width: 420px){
+        flex-direction: column;
+    }
+    div.content {
+        padding: 10px;
+        label {
+            display: block;
+            padding-bottom: 2px;
+            color: crimson;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+        }
+    }
+    input[type='submit'] {
+        border: 2px solid crimson;
+        color: crimson;
+        background-color: inherit;
+        border-radius: 12px;
+        font-size: 14px;
+        margin-top: 12px;
+        padding: 8px 0px;
+    }
+}
