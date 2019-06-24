@@ -26,14 +26,19 @@ form.form {
             border-radius: 8px;
         }
     }
-    input[type='submit'] {
+    .button-container {
+        padding: 0 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .back-button, input[type='submit'] {
         border: 2px solid crimson;
         color: crimson;
         background-color: gold;;
         border-radius: 12px;
         font-size: 16px;
         margin: 12px auto;
-        width: 80%;
+        width: 120px;
         padding: 15px 0px;
         text-transform: uppercase;
         min-height: 52px;

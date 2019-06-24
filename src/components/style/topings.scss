@@ -1,4 +1,20 @@
 .topings {
     border: 1px solid crimson;
     border-radius: 20px;
+    &-selection {
+        min-width: 240px;
+        .css-1hwfws3 {
+            width: calc(100% - 37px);
+        }
+        .css-1rhbuit-multiValue {
+            background-color: crimson;
+            color: gold;
+            .css-12jo7m5 {
+                color: gold;
+            }
+        }
+    }
+    label.toping {
+        padding-left: 0 !important;
+    }
 }

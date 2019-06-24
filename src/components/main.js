@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Router } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 // import FillBar from './components/fillBar'
 import { UserDetails, PizzaDetails, PaymentDetails } from './index'
@@ -13,6 +13,8 @@ class Main extends React.Component {
         this.handleUserDetailsChange = this.handleUserDetailsChange.bind(this);
         this.handlePizzaDetailsChange = this.handlePizzaDetailsChange.bind(this);
         this.handlePaymentDetailsChange = this.handlePaymentDetailsChange.bind(this);
+        this.navigateBack = this.navigateBack.bind(this);
+
         this.state = {
             orderDetail: {
                 dough: '',
@@ -49,58 +51,83 @@ class Main extends React.Component {
         this.setState({ paymentDetails: merged });
     }
 
+    navigateToPage() {
+        // e.preventDefault();
+        const { history } = this.props;
+        switch (history.location.pathname) {
+            case '/':
+                history.replace('/order');
+                break;
+            case '/order':
+                history.replace('/payment');
+                break;
+            default:
+                break;
+        }
+    }
+
+    navigateBack(e) {
+        e.preventDefault();
+        const { history } = this.props;
+        switch (history.location.pathname) {
+            case '/order':
+                history.replace('/');
+                break;
+            case '/payment':
+                history.replace('/order');
+                break;
+            default:
+                break;
+        }
+    }
+
     submitOrder(event) {
         event.preventDefault();
         const { orderDetail, userDetails, paymentDetails } = this.state;
-        const { history } = this.props;
         console.log(`this is your detail: ${JSON.stringify(userDetails)}
                 this is your order: ${JSON.stringify(orderDetail)}
                 this is the payment method: ${JSON.stringify(paymentDetails)}`)
-        history.push('/order');
+        this.navigateToPage();
     }
     render() { // TODO: add back navigation button
         const { userDetails, orderDetail, paymentDetails } = this.state;
+        const { history } = this.props;
+        const currentPath = history.location.pathname;
         return (
             <div className='main'>
                 <h1>
                     <label>
                         Pizza Party
-            </label>
-                    <span className='logo'></span>
+                    </label>
+                    <span className='logo' />
                 </h1>
                 <div className='content'>
                     <form className="form">
-                        {/* <section>
-              <UserDetails
-                userDetails={userDetails}
-                onUserDetailsChange={this.handleUserDetailsChange} />
-            </section>
-            <section>
-              <PizzaDetails
-                pizzaDetails={orderDetail}
-                onPizzaDetailsChange={this.handlePizzaDetailsChange} />
-            </section>
-            <section>
-              <PaymentDetails
-                paymentDetails={paymentDetails}
-                onPaymentDetailsChange={this.handlePaymentDetailsChange} />
-            </section> */}
-                        <Switch>
-                            <Route exact path='/order'
-                                component={() =>
-                                    <PizzaDetails
-                                        pizzaDetails={orderDetail}
-                                        onPizzaDetailsChange={this.handlePizzaDetailsChange} />
-                                } />
-                            <Route exact path="/payment" component={PaymentDetails} />
-                            <Route exact path="/"
-                                component={() =>
-                                    <UserDetails
-                                        userDetails={userDetails}
-                                        onUserDetailsChange={this.handleUserDetailsChange} />
-                                } />
-                        </Switch>
-                        <input type="submit" value="Submit" onClick={this.submitOrder} />
+                        <Router history={history}>
+                            <Switch>
+                                <Route exact path='/order'
+                                    component={() =>
+                                        <PizzaDetails
+                                            pizzaDetails={orderDetail}
+                                            onPizzaDetailsChange={this.handlePizzaDetailsChange} />
+                                    } />
+                                <Route exact path="/payment"
+                                    component={() =>
+                                        <PaymentDetails
+                                            paymentDetails={paymentDetails}
+                                            onPaymentDetailsChange={this.handlePaymentDetailsChange} />} />
+                                <Route exact path="/"
+                                    component={() =>
+                                        <UserDetails
+                                            userDetails={userDetails}
+                                            onUserDetailsChange={this.handleUserDetailsChange} />
+                                    } />
+                            </Switch>
+                        </Router>
+                        <div className="button-container">
+                            {currentPath !== '/' && <button className='back-button' onClick={this.navigateBack}>Back</button>}
+                            <input type="submit" value={currentPath === '/payment' ? 'Submit' : 'Next'} onClick={this.submitOrder} />
+                        </div>
                     </form>
                 </div>
             </div>

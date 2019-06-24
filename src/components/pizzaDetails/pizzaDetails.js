@@ -1,29 +1,29 @@
 import React from "react";
-import Multiselect from 'multiselect-dropdown-react';
+import Select from 'react-select';
 
 const optionsForTopings = [
     {
-        name: "Mashrooms",
+        label: "Mashrooms",
         value: 'Mashrooms'
     },
     {
-        name: "Pineapple",
+        label: "Pineapple",
         value: 'Pineapple'
     },
     {
-        name: "Onion",
+        label: "Onion",
         value: 'Onion'
     },
     {
-        name: "Olives", 
+        label: "Olives",
         value: 'Olives'
     },
     {
-        name: "Corn",
+        label: "Corn",
         value: 'Corn'
     },
     {
-        name: "Tuna",
+        label: "Tuna",
         value: 'Tuna'
     }
 ];
@@ -35,12 +35,12 @@ class PizzaDetails extends React.Component {
         this.onTopingsChange = this.onTopingsChange.bind(this);
     }
 
-    
+
     handleOrderChange(type, value) {
         const { onPizzaDetailsChange } = this.props;
-        onPizzaDetailsChange({[type]: value});
+        onPizzaDetailsChange({ [type]: value });
     }
-    
+
     doughChange(event) {
         this.handleOrderChange('dough', event.target.value);
     }
@@ -50,7 +50,7 @@ class PizzaDetails extends React.Component {
     }
 
     render() { // TODO: multi select component is not working, selected it not displayed
-        const { pizzaDetails: { dough = '' } } = this.props
+        const { pizzaDetails: { dough = '', topings = [] } } = this.props
         return (
             <section className='wrapper'>
                 <section className="content">
@@ -60,10 +60,16 @@ class PizzaDetails extends React.Component {
                     <input type="text" name="dough" value={dough} onChange={this.doughChange} />
                 </section>
                 <section className="topings content">
-                    <label>
+                    <label className='toping'>
                         Topings:
                     </label>
-                    <Multiselect options={optionsForTopings} onSelectOptions={this.onTopingsChange} />
+                    <Select
+                        placeholder='Select a toping'
+                        className='topings-selection'
+                        isMulti
+                        value={topings}
+                        onChange={this.onTopingsChange}
+                        options={optionsForTopings} />
                 </section>
             </section>
         )

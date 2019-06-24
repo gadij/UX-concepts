@@ -24,11 +24,11 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
-    "multiselect-dropdown-react": "^1.0.5",
     "node-sass": "^4.11.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "react-select": "^3.0.4"
   }
 }
