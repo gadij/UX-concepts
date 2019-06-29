@@ -63,7 +63,7 @@ class Main extends React.Component {
         this.setState({ signDetails: merged });
     }
 
-    navigateToPage() {
+    navigateToPage(e) {
         // e.preventDefault();
         const { history } = this.props;
         switch (history.location.pathname) {
@@ -127,7 +127,7 @@ class Main extends React.Component {
             )
         }
         return (
-            <input type="submit" value={'Sign in'} onClick={this.navigateToPage} />
+            <input type="submit" value={'Sign in'} onClick={this.submitOrder} />
         )
     }
 

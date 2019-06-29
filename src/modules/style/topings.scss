@@ -1,17 +1,52 @@
 .topings {
     border: 1px solid crimson;
     border-radius: 20px;
-    &-selection {
-        min-width: 240px;
-        .css-1hwfws3 {
-            width: calc(100% - 37px);
+    // &-selection {
+    //     min-width: 240px;
+    //     .css-1hwfws3 {
+    //         width: calc(100% - 37px);
+    //     }
+    //     .css-1rhbuit-multiValue {
+    //         background-color: crimson;
+    //         color: gold;
+    //         .css-12jo7m5 {
+    //             color: gold;
+    //         }
+    //     }
+    // }
+    &-container {
+        display: grid;
+        grid-template-columns: repeat(2, 130px);
+        overflow: auto;
+        padding-left: 10px;
+        max-height: 200px;
+        position: relative;
+        .selected {
+            border: 3px solid mediumseagreen;
+            border-radius: 8px;
         }
-        .css-1rhbuit-multiValue {
-            background-color: crimson;
-            color: gold;
-            .css-12jo7m5 {
-                color: gold;
+        .selectable-toping {
+            width: 95px;
+            height: 95px;
+            margin: 10 auto;
+            &:hover {
+                box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.3);
             }
+        }
+        .toping-mushrooms {
+            content: url(../../assets/mushrooms.jpg);
+        }
+        .toping-corn {
+            content: url(../../assets/corn.jpg);
+        }
+        .toping-olives {
+            content: url(../../assets/olives.jpg);
+        }
+        .toping-onion {
+            content: url(../../assets/onion.jpg);
+        }
+        .toping-pineapple {
+            content: url(../../assets/pineapple.jpg);
         }
     }
     label.toping {

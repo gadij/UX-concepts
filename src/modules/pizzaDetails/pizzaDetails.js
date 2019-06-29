@@ -1,11 +1,12 @@
 import React from "react";
-import Select from 'react-select';
+// import Select from 'react-select';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 const optionsForTopings = [
     {
-        label: "Mashrooms",
-        value: 'Mashrooms'
+        label: "Mushrooms",
+        value: 'Mushrooms'
     },
     {
         label: "Pineapple",
@@ -22,10 +23,6 @@ const optionsForTopings = [
     {
         label: "Corn",
         value: 'Corn'
-    },
-    {
-        label: "Tuna",
-        value: 'Tuna'
     }
 ];
 
@@ -46,12 +43,43 @@ class PizzaDetails extends React.Component {
         this.handleOrderChange('dough', event.target.value);
     }
 
-    onTopingsChange(values) {
-        this.handleOrderChange('topings', values);
+    onTopingsChange(event) {
+        event.preventDefault();
+        const { pizzaDetails: { topings = [] } } = this.props;
+        const { id } = event.target;
+        let selectedTopings = [];
+        if (topings.includes(id)) {
+            selectedTopings = [...topings.filter(item => item !== id)]
+        } else {
+            selectedTopings = [...topings];
+            selectedTopings.push(id);
+        }
+        this.handleOrderChange('topings', selectedTopings);
+    }
+
+    renderTopings() {
+        const { pizzaDetails: { topings = [] } }= this.props;
+        return(
+            <div className="topings-container">
+                {optionsForTopings.map(item => {
+                    const classname = classNames(
+                        'selectable-toping',
+                        `toping-${item.value}`,
+                        {
+                            'selected': topings.includes(item.value)
+                        }
+                    );
+                    return(
+                        <span onClick={this.onTopingsChange} id={item.value} key={item.value} className={classname}>
+                        </span>
+                    );
+                })}
+            </div>
+        );
     }
 
     render() { // TODO: multi select component is not working, selected it not displayed
-        const { pizzaDetails: { dough = '', topings = [] } } = this.props
+        const { pizzaDetails: { dough = '' }} = this.props
         return (
             <section className='wrapper'>
                 <section className="content">
@@ -64,13 +92,14 @@ class PizzaDetails extends React.Component {
                     <label className='toping'>
                         Topings:
                     </label>
-                    <Select
+                    {this.renderTopings()}
+                    {/* <Select
                         placeholder='Select a toping'
                         className='topings-selection'
                         isMulti
                         value={topings}
                         onChange={this.onTopingsChange}
-                        options={optionsForTopings} />
+                        options={optionsForTopings} /> */}
                 </section>
             </section>
         )
