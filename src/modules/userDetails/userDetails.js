@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 class UserDetails extends React.Component {
     constructor(props) {
@@ -51,6 +52,15 @@ class UserDetails extends React.Component {
             </section>
         )
     }
+}
+
+UserDetails.propTypes = {
+    userDetails: PropTypes.shape({
+        name: PropTypes.string,
+        city: PropTypes.string,
+        address: PropTypes.string
+      }),
+    onUserDetailsChange: PropTypes.func
 }
 
 export default UserDetails

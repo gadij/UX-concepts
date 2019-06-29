@@ -1,5 +1,6 @@
 import React from "react";
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
 const optionsForTopings = [
     {
@@ -74,6 +75,14 @@ class PizzaDetails extends React.Component {
             </section>
         )
     }
+}
+
+PizzaDetails.propTypes = {
+    pizzaDetails: PropTypes.shape({
+        dough: PropTypes.string,
+        topings: PropTypes.array
+    }),
+    onPizzaDetailsChange: PropTypes.func
 }
 
 export default PizzaDetails

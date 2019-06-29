@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import Main from './components/main';
+import Main from './modules/main';
 
 class App extends React.Component {
 

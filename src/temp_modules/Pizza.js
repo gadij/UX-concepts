@@ -1,5 +1,5 @@
 import React from 'react';
-import PizzaDetails from "../components";
+import PizzaDetails from "../modules";
 
 const Pizza = ({ orderDetails }) => {
 

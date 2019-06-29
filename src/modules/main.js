@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, Router } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 // import FillBar from './components/fillBar'
-import { UserDetails, PizzaDetails, PaymentDetails } from './index'
+import { UserDetails, PizzaDetails, PaymentDetails, SignIn } from './index'
 
 import './index.scss';
 
@@ -14,8 +14,16 @@ class Main extends React.Component {
         this.handlePizzaDetailsChange = this.handlePizzaDetailsChange.bind(this);
         this.handlePaymentDetailsChange = this.handlePaymentDetailsChange.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
+        this.validateSignIn = this.validateSignIn.bind(this);
+        this.handleSignInChange = this.handleSignInChange.bind(this);
 
         this.state = {
+            signDetails: {
+                email: '',
+                password: '',
+                retypePassword: '',
+                retypeError: false
+            },
             orderDetail: {
                 dough: '',
                 topings: []
@@ -51,11 +59,20 @@ class Main extends React.Component {
         this.setState({ paymentDetails: merged });
     }
 
+    handleSignInChange(newSignInDetails) {
+        const { signDetails } = this.state;
+        const merged = Object.assign(signDetails, newSignInDetails);
+        this.setState({ signDetails: merged });
+    }
+
     navigateToPage() {
         // e.preventDefault();
         const { history } = this.props;
         switch (history.location.pathname) {
             case '/':
+                history.replace('/user');
+                break;
+            case '/user':
                 history.replace('/order');
                 break;
             case '/order':
@@ -71,7 +88,7 @@ class Main extends React.Component {
         const { history } = this.props;
         switch (history.location.pathname) {
             case '/order':
-                history.replace('/');
+                history.replace('/user');
                 break;
             case '/payment':
                 history.replace('/order');
@@ -79,6 +96,22 @@ class Main extends React.Component {
             default:
                 break;
         }
+    }
+
+    validateSignIn(event) {
+        event.preventDefault();
+        const { signDetails } = this.state;
+        const { password, retypePassword } = signDetails;
+        const merged = Object.assign(signDetails, { retypeError: true })
+        if (password !== retypePassword) {
+            this.setState({
+                signDetails: merged
+            });
+            return;
+        } else {
+            this.navigateToPage();
+        }
+
     }
 
     submitOrder(event) {
@@ -89,8 +122,52 @@ class Main extends React.Component {
                 this is the payment method: ${JSON.stringify(paymentDetails)}`)
         this.navigateToPage();
     }
+
+    getSubmitButton(currentPath) {
+        if (currentPath !== '/') {
+            return (
+                <input type="submit" value={currentPath === '/payment' ? 'Submit' : 'Next'} onClick={this.submitOrder} />
+            )
+        }
+        return (
+            <input type="submit" value={'Sign in'} onClick={this.validateSignIn} />
+        )
+    }
+
+    renderRoute(history) {
+        const { userDetails, orderDetail, paymentDetails, signDetails } = this.state;
+        return (
+            <Router history={history}>
+                <Switch>
+                    <Route key="signin" exact path='/'
+                        render={() =>
+                            <SignIn
+                                {...signDetails}
+                                onSignInChange={this.handleSignInChange} />
+                        } />
+                    <Route key="pizza" exact path='/order'
+                        render={() =>
+                            <PizzaDetails
+                                pizzaDetails={orderDetail}
+                                onPizzaDetailsChange={this.handlePizzaDetailsChange} />
+                        } />
+                    <Route key="payment" exact path="/payment"
+                        render={() =>
+                            <PaymentDetails
+                                paymentDetails={paymentDetails}
+                                onPaymentDetailsChange={this.handlePaymentDetailsChange} />} />
+                    <Route key="user" exact path="/user"
+                        render={() =>
+                            <UserDetails
+                                userDetails={userDetails}
+                                onUserDetailsChange={this.handleUserDetailsChange} />
+                        } />
+                </Switch>
+            </Router>
+        )
+    }
+
     render() { // TODO: add back navigation button
-        const { userDetails, orderDetail, paymentDetails } = this.state;
         const { history } = this.props;
         const currentPath = history.location.pathname;
         return (
@@ -103,30 +180,10 @@ class Main extends React.Component {
                 </h1>
                 <div className='content'>
                     <form className="form">
-                        <Router history={history}>
-                            <Switch>
-                                <Route exact path='/order'
-                                    component={() =>
-                                        <PizzaDetails
-                                            pizzaDetails={orderDetail}
-                                            onPizzaDetailsChange={this.handlePizzaDetailsChange} />
-                                    } />
-                                <Route exact path="/payment"
-                                    component={() =>
-                                        <PaymentDetails
-                                            paymentDetails={paymentDetails}
-                                            onPaymentDetailsChange={this.handlePaymentDetailsChange} />} />
-                                <Route exact path="/"
-                                    component={() =>
-                                        <UserDetails
-                                            userDetails={userDetails}
-                                            onUserDetailsChange={this.handleUserDetailsChange} />
-                                    } />
-                            </Switch>
-                        </Router>
+                        {this.renderRoute(history)}
                         <div className="button-container">
-                            {currentPath !== '/' && <button className='back-button' onClick={this.navigateBack}>Back</button>}
-                            <input type="submit" value={currentPath === '/payment' ? 'Submit' : 'Next'} onClick={this.submitOrder} />
+                            {(currentPath !== '/' && currentPath !== 'user') && <button className='back-button' onClick={this.navigateBack}>Back</button>}
+                            {this.getSubmitButton(currentPath)}
                         </div>
                     </form>
                 </div>
