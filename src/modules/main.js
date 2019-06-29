@@ -6,6 +6,8 @@ import { UserDetails, PizzaDetails, PaymentDetails, SignIn } from './index'
 
 import './index.scss';
 
+const SAVED_EMAIL = 'gadij@tikalk.com';
+
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +16,7 @@ class Main extends React.Component {
         this.handlePizzaDetailsChange = this.handlePizzaDetailsChange.bind(this);
         this.handlePaymentDetailsChange = this.handlePaymentDetailsChange.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
-        // this.validateSignIn = this.validateSignIn.bind(this);
+        this.handleSignIn = this.handleSignIn.bind(this);
         this.handleSignInChange = this.handleSignInChange.bind(this);
 
         this.state = {
@@ -63,8 +65,7 @@ class Main extends React.Component {
         this.setState({ signDetails: merged });
     }
 
-    navigateToPage(e) {
-        // e.preventDefault();
+    navigateToPage() {
         const { history } = this.props;
         switch (history.location.pathname) {
             case '/':
@@ -96,21 +97,6 @@ class Main extends React.Component {
         }
     }
 
-    // validateSignIn(event) {
-    //     event.preventDefault();
-    //     const { signDetails } = this.state;
-    //     const { password, retypePassword } = signDetails;
-    //     const merged = Object.assign(signDetails, { retypeError: true })
-    //     if (password !== retypePassword) {
-    //         this.setState({
-    //             signDetails: merged
-    //         });
-    //         return;
-    //     } else {
-    //         this.navigateToPage();
-    //     }
-    // }
-
     submitOrder(event) {
         event.preventDefault();
         const { orderDetail, userDetails, paymentDetails } = this.state;
@@ -120,6 +106,24 @@ class Main extends React.Component {
         this.navigateToPage();
     }
 
+    handleSignIn(event) {
+        event.preventDefault();
+        const { signDetails } = this.state;
+        console.log(`You have been sign in as ${signDetails.email}`);
+        if (signDetails.email === SAVED_EMAIL) {
+            const userDetails = {
+                name: 'Gadi jacobson',
+                address: 'Kiriat Atidim 7',
+                city: 'Tel aviv'
+            }
+            this.setState({
+                userDetails
+            }, this.navigateToPage());
+        } else {
+            this.navigateToPage()
+        }
+    }
+
     getSubmitButton(currentPath) {
         if (currentPath !== '/') {
             return (
@@ -127,7 +131,7 @@ class Main extends React.Component {
             )
         }
         return (
-            <input type="submit" value={'Sign in'} onClick={this.submitOrder} />
+            <input type="submit" value={'Sign in'} onClick={this.handleSignIn} />
         )
     }
 
@@ -157,6 +161,7 @@ class Main extends React.Component {
                         render={() =>
                             <UserDetails
                                 userDetails={userDetails}
+                                email={signDetails.email}
                                 onUserDetailsChange={this.handleUserDetailsChange} />
                         } />
                 </Switch>
@@ -179,7 +184,7 @@ class Main extends React.Component {
                     <form className="form">
                         {this.renderRoute(history)}
                         <div className="button-container">
-                            {(currentPath !== '/' && currentPath !== 'user') && <button className='back-button' onClick={this.navigateBack}>Back</button>}
+                            {(currentPath !== '/' && currentPath !== '/user') && <button className='back-button' onClick={this.navigateBack}>Back</button>}
                             {this.getSubmitButton(currentPath)}
                         </div>
                     </form>

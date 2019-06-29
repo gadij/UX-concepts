@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CardDetails = ({onPaymentDetailsChange, paymentDetails: {cardNumber, valid, cvv }}) => {
+const CardDetails = ({ onPaymentDetailsChange, cardNumber, valid, cvv }) => {
 
     const handlePaymentDetailsChange = (type, value) => {
-        onPaymentDetailsChange({[type]: value});
+        onPaymentDetailsChange({ [type]: value });
     };
 
     const onCardNumberChange = (event) => {
@@ -45,11 +45,9 @@ const CardDetails = ({onPaymentDetailsChange, paymentDetails: {cardNumber, valid
 
 CardDetails.propTypes = {
     onPaymentDetailsChange: PropTypes.func,
-    paymentDetails: PropTypes.shape({
-        cardNumber: PropTypes.string,
-        valid: PropTypes.string,
-        cvv: PropTypes.string
-    })
+    cardNumber: PropTypes.string,
+    valid: PropTypes.string,
+    cvv: PropTypes.string
 }
 
 export default CardDetails;

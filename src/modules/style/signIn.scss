@@ -6,10 +6,13 @@
 }
 span.toggle-password {
     // background-image: url();
-    content: url(../../assets/showPassword.png);
     width: 30px;
     height: 30px;
     position: absolute;
     cursor: pointer;
-    right: 36px;
+    right: 5px;
+    content: url(../../assets/showPassword.png);
+    &.hide {
+        content: url(../../assets/hidePassword.png);
+    }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from 'classnames';
 
 class SignIn extends React.Component {
     constructor(props) {
@@ -36,6 +37,10 @@ class SignIn extends React.Component {
     render() {
         const { email = '', password = '', /*retypePassword = '' , retypeError = false*/ } = this.props;
         const { passwordType } = this.state;
+        const classnames = classNames('toggle-password',
+        {
+            'hide': passwordType === 'text'
+        })
         return (
             <section className='wrapper'>
                 <section className="content">
@@ -50,7 +55,7 @@ class SignIn extends React.Component {
                     </label>
                     <div className='password-container'>
                         <input key='password' type={passwordType} name="password" value={password} onChange={this.onPasswordChange}/>
-                        <span className='toggle-password' onClick={this.onPasswordReveal}></span>
+                        <span className={classnames} onClick={this.onPasswordReveal}></span>
                     </div> 
 
                 </section>

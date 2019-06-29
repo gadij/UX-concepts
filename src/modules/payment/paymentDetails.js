@@ -19,23 +19,23 @@ class PaymentDetails extends React.Component {
         const { paymentDetails, onPaymentDetailsChange } = this.props;
         const { paymentMethod } = this.state;
         return (
-            <div className="paymentMethod-container wrapper" onChange={this.setPaymentMethod}>
+            <div className="paymentMethod-container wrapper">
                 <div className="paymentMethod-method">
 
-                    <input type="radio" value="cash" name="method" />
+                    <input key='cash' type="radio" value="cash" name="method" onChange={this.setPaymentMethod} />
                     <label>
                         CASH
                     </label>
                 </div>
                 <div className="paymentMethod-method">
-                    <input type="radio" value="credit" name="method" defaultChecked />
+                    <input  key='credit' type="radio" value="credit" name="method" defaultChecked onChange={this.setPaymentMethod}/>
                     <label>
                         CREDIT CARD
                         </label>
                     {paymentMethod === 'credit'
                         && <Card
                             onPaymentDetailsChange={onPaymentDetailsChange}
-                            paymentDetails={paymentDetails} />
+                            {...paymentDetails} />
                     }
                 </div>
             </div>

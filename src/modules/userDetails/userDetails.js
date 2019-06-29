@@ -59,7 +59,7 @@ UserDetails.propTypes = {
         name: PropTypes.string,
         city: PropTypes.string,
         address: PropTypes.string
-      }),
+    }),
     onUserDetailsChange: PropTypes.func
 }
 
