@@ -14,15 +14,13 @@ class Main extends React.Component {
         this.handlePizzaDetailsChange = this.handlePizzaDetailsChange.bind(this);
         this.handlePaymentDetailsChange = this.handlePaymentDetailsChange.bind(this);
         this.navigateBack = this.navigateBack.bind(this);
-        this.validateSignIn = this.validateSignIn.bind(this);
+        // this.validateSignIn = this.validateSignIn.bind(this);
         this.handleSignInChange = this.handleSignInChange.bind(this);
 
         this.state = {
             signDetails: {
                 email: '',
                 password: '',
-                retypePassword: '',
-                retypeError: false
             },
             orderDetail: {
                 dough: '',
@@ -98,21 +96,20 @@ class Main extends React.Component {
         }
     }
 
-    validateSignIn(event) {
-        event.preventDefault();
-        const { signDetails } = this.state;
-        const { password, retypePassword } = signDetails;
-        const merged = Object.assign(signDetails, { retypeError: true })
-        if (password !== retypePassword) {
-            this.setState({
-                signDetails: merged
-            });
-            return;
-        } else {
-            this.navigateToPage();
-        }
-
-    }
+    // validateSignIn(event) {
+    //     event.preventDefault();
+    //     const { signDetails } = this.state;
+    //     const { password, retypePassword } = signDetails;
+    //     const merged = Object.assign(signDetails, { retypeError: true })
+    //     if (password !== retypePassword) {
+    //         this.setState({
+    //             signDetails: merged
+    //         });
+    //         return;
+    //     } else {
+    //         this.navigateToPage();
+    //     }
+    // }
 
     submitOrder(event) {
         event.preventDefault();
@@ -130,7 +127,7 @@ class Main extends React.Component {
             )
         }
         return (
-            <input type="submit" value={'Sign in'} onClick={this.validateSignIn} />
+            <input type="submit" value={'Sign in'} onClick={this.navigateToPage} />
         )
     }
 

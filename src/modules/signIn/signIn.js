@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 class SignIn extends React.Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     passwordType: 'password'
-        // }
+        this.state = {
+            passwordType: 'password'
+        }
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
-        this.onRetypePasswordChange = this.onRetypePasswordChange.bind(this);
         // this.onRetypePasswordChange = this.onRetypePasswordChange.bind(this);
+        this.onPasswordReveal = this.onPasswordReveal.bind(this);
     }
 
     handleSignInChange(type, value) {
@@ -26,13 +26,16 @@ class SignIn extends React.Component {
         this.handleSignInChange('password', event.target.value);
     }
 
-    onRetypePasswordChange(event) {
-        this.handleSignInChange('retypePassword', event.target.value);
+    onPasswordReveal(event) {
+        event.preventDefault();
+        const { passwordType } = this.state;
+        const type = passwordType === 'password' ? 'text' : 'password';
+        this.setState({ 'passwordType': type });
     }
 
     render() {
-        const { email = '', password = '', retypePassword = '', retypeError = false } = this.props;
-        // const { passwordType } = this.state;
+        const { email = '', password = '', /*retypePassword = '' , retypeError = false*/ } = this.props;
+        const { passwordType } = this.state;
         return (
             <section className='wrapper'>
                 <section className="content">
@@ -45,25 +48,26 @@ class SignIn extends React.Component {
                     <label>
                         Password:
                     </label>
-                    <input key='password' type='password' name="password" value={password} onChange={this.onPasswordChange} />
+                    <div className='password-container'>
+                        <input key='password' type={passwordType} name="password" value={password} onChange={this.onPasswordChange}/>
+                        <span className='toggle-password' onClick={this.onPasswordReveal}></span>
+                    </div> 
+
                 </section>
-                <section className="content">
+                {/* <section className="content">
                     <label>
                         Retype Password:
                     </label>
                     <input name="retype" type="password" name="retype" value={retypePassword} onChange={this.onRetypePasswordChange} />
-                </section>
-                {retypeError && <div className="password-validation">* Ops password and retype password dont match</div>}
+                </section> */}
             </section>
         )
     }
 }
 
 SignIn.propTypes = {
-    retypePassword: PropTypes.string,
     password: PropTypes.string,
     email: PropTypes.string,
-    retypeError: PropTypes.bool,
     onSignInChange: PropTypes.func
 }
 
