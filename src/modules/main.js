@@ -3,10 +3,21 @@ import { Switch, Route, Router } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
 // import FillBar from './components/fillBar'
 import { UserDetails, PizzaDetails, PaymentDetails, SignIn } from './index'
+import ReactModal from "react-modal";
 
 import './index.scss';
 
 const SAVED_EMAIL = 'gadij@tikalk.com';
+
+const customStyles = {
+    content : {
+        top: '25%',
+        left: '25%',
+        right: '25%',
+        bottom: '25%',
+        background: 'crimson'
+    }
+  };
 
 class Main extends React.Component {
     constructor(props) {
@@ -18,6 +29,8 @@ class Main extends React.Component {
         this.navigateBack = this.navigateBack.bind(this);
         this.handleSignIn = this.handleSignIn.bind(this);
         this.handleSignInChange = this.handleSignInChange.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
 
         this.state = {
             signDetails: {
@@ -37,7 +50,8 @@ class Main extends React.Component {
                 cardNumber: '',
                 valid: '',
                 cvv: ''
-            }
+            },
+            showFavoriteOrderModal: false
         }
     }
 
@@ -169,6 +183,14 @@ class Main extends React.Component {
         )
     }
 
+    handleOpenModal () {
+        this.setState({ showModal: true });
+    }
+    
+    handleCloseModal () {
+        this.setState({ showModal: false });
+    }
+
     render() { // TODO: add back navigation button
         const { history } = this.props;
         const currentPath = history.location.pathname;
@@ -189,6 +211,18 @@ class Main extends React.Component {
                         </div>
                     </form>
                 </div>
+                <div>
+                
+                <ReactModal 
+                    isOpen={true}
+                    contentLabel="onRequestClose Example"
+                    onRequestClose={this.handleCloseModal}
+                    style={customStyles}
+                >
+                <p>Modal text!</p>
+                <button onClick={this.handleCloseModal}>Close Modal</button>
+                </ReactModal>
+            </div>
             </div>
         );
 
