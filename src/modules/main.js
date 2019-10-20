@@ -1,23 +1,14 @@
 import React from "react";
 import { Switch, Route, Router } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
-// import FillBar from './components/fillBar'
-import { UserDetails, PizzaDetails, PaymentDetails, SignIn } from './index'
-import ReactModal from "react-modal";
+import { UserDetails, PizzaDetails, PaymentDetails, SignIn, OrderSuccess } from './index'
+import { favorites } from '../storage/favorite-info';
 
 import './index.scss';
 
 const SAVED_EMAIL = 'gadij@tikalk.com';
 
-const customStyles = {
-    content : {
-        top: '25%',
-        left: '25%',
-        right: '25%',
-        bottom: '25%',
-        background: 'crimson'
-    }
-  };
+let self;
 
 class Main extends React.Component {
     constructor(props) {
@@ -31,6 +22,7 @@ class Main extends React.Component {
         this.handleSignInChange = this.handleSignInChange.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleNavigateToSummary = this.handleNavigateToSummary.bind(this);
 
         this.state = {
             signDetails: {
@@ -53,6 +45,8 @@ class Main extends React.Component {
             },
             showFavoriteOrderModal: false
         }
+
+        self = this;
     }
 
     handleUserDetailsChange(newDetails) {
@@ -79,8 +73,17 @@ class Main extends React.Component {
         this.setState({ signDetails: merged });
     }
 
-    navigateToPage() {
-        const { history } = this.props;
+    navigateToPage(to) {
+        let history;
+        if (this === undefined) {
+            history = self.props.history;
+        } else {
+            history = this.props.history;
+        }
+        if (to) {
+            history.replace(`/${to}`);
+            return;
+        }
         switch (history.location.pathname) {
             case '/':
                 history.replace('/user');
@@ -98,7 +101,7 @@ class Main extends React.Component {
 
     navigateBack(e) {
         e.preventDefault();
-        const { history } = this.props;
+        const history = this && this.props.history || self.props.history;
         switch (history.location.pathname) {
             case '/order':
                 history.replace('/user');
@@ -107,6 +110,7 @@ class Main extends React.Component {
                 history.replace('/order');
                 break;
             default:
+                history.replace('/');
                 break;
         }
     }
@@ -139,6 +143,7 @@ class Main extends React.Component {
     }
 
     getSubmitButton(currentPath) {
+        if (currentPath === '/orderSuccess') return;
         if (currentPath !== '/') {
             return (
                 <input type="submit" value={currentPath === '/payment' ? 'Submit' : 'Next'} onClick={this.submitOrder} />
@@ -149,8 +154,22 @@ class Main extends React.Component {
         )
     }
 
+    getBackButton(currentPath) {
+        if (currentPath === '/orderSuccess') {
+            return (
+                <button className='back-button' onClick={this.navigateBack}>Back to Home</button>
+            )
+        }
+        return (currentPath !== '/' && currentPath !== '/user') && <button className='back-button' onClick={this.navigateBack}>Back</button>
+    }
+
+    handleNavigateToSummary() {
+        this.navigateToPage('orderSuccess');
+    }
+
     renderRoute(history) {
         const { userDetails, orderDetail, paymentDetails, signDetails } = this.state;
+        const favoriteInfo = signDetails.email && favorites[signDetails.email];
         return (
             <Router history={history}>
                 <Switch>
@@ -176,7 +195,13 @@ class Main extends React.Component {
                             <UserDetails
                                 userDetails={userDetails}
                                 email={signDetails.email}
-                                onUserDetailsChange={this.handleUserDetailsChange} />
+                                favoriteInfo={favoriteInfo}
+                                goToOrderSuccess={this.navigateToPage}
+                                onUserDetailsChange={this.handleNavigateToSummary} />
+                        } />
+                    <Route key="orderSuccess" exact path="/orderSuccess"
+                        render={() =>
+                            <OrderSuccess />
                         } />
                 </Switch>
             </Router>
@@ -206,23 +231,11 @@ class Main extends React.Component {
                     <form className="form">
                         {this.renderRoute(history)}
                         <div className="button-container">
-                            {(currentPath !== '/' && currentPath !== '/user') && <button className='back-button' onClick={this.navigateBack}>Back</button>}
+                            {this.getBackButton(currentPath)}
                             {this.getSubmitButton(currentPath)}
                         </div>
                     </form>
                 </div>
-                <div>
-                
-                <ReactModal 
-                    isOpen={true}
-                    contentLabel="onRequestClose Example"
-                    onRequestClose={this.handleCloseModal}
-                    style={customStyles}
-                >
-                <p>Modal text!</p>
-                <button onClick={this.handleCloseModal}>Close Modal</button>
-                </ReactModal>
-            </div>
             </div>
         );
 
