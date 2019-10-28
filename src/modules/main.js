@@ -157,7 +157,7 @@ class Main extends React.Component {
     getBackButton(currentPath) {
         if (currentPath === '/orderSuccess') {
             return (
-                <button className='back-button' onClick={this.navigateBack}>Back to Home</button>
+                <button className='back-button' onClick={this.navigateBack}>Home</button>
             )
         }
         return (currentPath !== '/' && currentPath !== '/user') && <button className='back-button' onClick={this.navigateBack}>Back</button>

@@ -50,7 +50,7 @@ class UserDetails extends React.Component {
             <h2 className="favorie-header">Hi {name}!</h2>
             <div className="favorite-icon"/>
             <section className="favorie-content">
-                <h4>Would you like to order you usuall?</h4>
+                <h4>Would you like to order you usual?</h4>
                 <p>
                     <div>
                         Dough: {pizzaOrder.dough}

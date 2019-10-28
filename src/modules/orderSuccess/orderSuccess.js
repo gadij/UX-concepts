@@ -7,16 +7,12 @@ class OrderSuccess extends React.PureComponent {
     render() {
 
         return(
-            <div className="paymentMethod-container wrapper">
-                success!
+            <div className="orderSuccess-container">
+                <h2>Order is on it`s way</h2>
+                <div className='orderSuccess-deliveryIcon' />
             </div>
          )
     }
 }
-
-// OrderSuccess.propTypes = {
-//     OrderSuccess: PropTypes.object,
-//     onOrderSuccessChange: PropTypes.func
-// }
 
 export default OrderSuccess
