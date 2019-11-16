@@ -21,4 +21,6 @@
     to scan the page and assess how much time it will take him to complete the task, 
     by giving him a short form each time, he will say: "ok this look pretty short and make sense, 
     it will take me a few seconds". 
-    **This is good as long as we dont create dozens of modules to "fool" the user, since they are not stupid, they will catch the idea pretty fast, and will leave the app.**
+
+### Design impact note: 
+    This is good as long as we dont create dozens of modules to "fool" the user, since they are not stupid, they will catch the idea pretty fast, and will leave the app.
