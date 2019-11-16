@@ -23,4 +23,5 @@
     it will take me a few seconds". 
 
 ### Design impact note: 
-    This is good as long as we dont create dozens of modules to "fool" the user, since they are not stupid, they will catch the idea pretty fast, and will leave the app.
+    This is good as long as we dont create dozens of modules to "fool" the user, 
+    since they are not stupid, they will catch the idea pretty fast, and will leave the app.
