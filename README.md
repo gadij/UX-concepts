@@ -15,4 +15,4 @@
     to understand the time and effort that will take him to finish the task in hand, 
     thus when user sees a big, long and complex form, 
     he will feel irritated or annoyed by it,
-     and on other cases will close the app and move to another 1.
+    and on other cases will close the app and move to another 1.
