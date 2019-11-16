@@ -1,14 +1,11 @@
 # UX Concepts
-
     Create a pizza ordering app in order to demonstrate good UX Desing vs. bad UX design.
     this only supports small display
 
 ## Previous branch: 
-    
     Seperating all user input forms to each module with similar context.
 
 ## This branch: 
-    
     step_3-sign_in_with_retype_password branch, 
     demonstrate a common issue with signing in to a new app\website, 
     each site, when creating a profile requires a sign in process, 
@@ -18,7 +15,6 @@
     privacy and many more to each user.
 
 ## Design impact: 
-
     This Branch demonstrate a very recent problem: retyping password in signin process, 
     the initial idea had a good intention behind it, when you sign in to an app, 
     and typing a password, 
