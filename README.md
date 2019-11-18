@@ -1,4 +1,4 @@
-# UX Principles
+# UX Concepts
     Create a pizza ordering app in order to demonstrate good UX design vs. bad UX design.
     This only supports small display
 
