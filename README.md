@@ -1,5 +1,5 @@
 # UX Concepts
-    Create a pizza ordering app in order to demonstrate good UX Desing vs. bad UX design.
+    Create a pizza ordering app in order to demonstrate good UX design vs. bad UX design.
     this only supports small display
 
 ## Previous branch: 
@@ -15,18 +15,17 @@
     privacy and many more to each user.
 
 ## Design impact: 
-    This Branch demonstrate a very recent problem: retyping password in signin process, 
+    This Branch demonstrate a very common problem: retyping password in signin process, 
     the initial idea had a good intention behind it, when you sign in to an app, 
-    and typing a password, 
-    usually you wont see the password typed rather then: *****, 
+    and typing a password, usually you wont see the password typed rather then: *****, 
     in order for other people not to see the password you typed when looking over your shoulder, 
     but if you intented to type a password, lets say: 'gadiIsTheKing123', 
     and by mistake you forgot to capitalize the 'k' thus resulting with password: 'gadiIsTheking123', 
     when you will try to login after the sign in process, you will be blocked, 
-    and you wont understand why. 
+    and you wont understand why!!! 
     Retyping a password decrease the probability of making the same mistake twice. 
     The app will complain if your two typed passwords wont match, which is a bit annoying, 
-    since you cant 'copy paste' the first one into the second one, 
+    since you cant 'copy paste' the first input into the second input, 
     but its way better than not understanding why the app blocks you out.
     this approach is part good and part bad, since there is a better way, 
-    which will be explained in the next branch
+    which will be explained in the next branch.
