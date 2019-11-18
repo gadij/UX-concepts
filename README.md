@@ -1,5 +1,5 @@
 #UX Concepts
-    Create a pizza ordering app in order to demonstrate good UX Desing vs. bad UX design.
+    Create a pizza ordering app in order to demonstrate good UX design vs. bad UX design.
     this only supports small display
 
 ## Previous branch: 
@@ -13,15 +13,15 @@
 ## Design impact: 
     We already know from the first branch about the problem with many forms grouped in 1 big form. 
     This branch solved this problem, 
-    by splitting the forms into several page/modules with similar context, 
-    for example: name, city and address are all under personal info. 
-    Credit card info is located under payment module, 
-    and pizza details such as dough and toppings are placed under pizza details or order details, 
-    this makes the user, upon each module, 
+    by splitting the forms into several pages/modules with similar context, 
+    for example: name, city and address are all grouped under personal info. 
+    Credit card info is grouped under payment module, 
+    and pizza details such as dough and toppings are grouped under pizza details or order details, 
+    this seperation of logic makes the user, 
     to scan the page and assess how much time it will take him to complete the task, 
     by giving him a short form each time, he will say: "ok this look pretty short and make sense, 
     it will take me a few seconds". 
 
 ### Design impact note: 
-    This is good as long as we dont create dozens of modules to "fool" the user, 
-    since they are not stupid, they will catch the idea pretty fast, and will leave the app.
+    This is good as long as we dont create dozens of modules to "fool" the user.
+    They are not stupid, they will catch the idea pretty fast, and will leave the app.
