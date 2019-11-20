@@ -7,8 +7,8 @@
 
 ## This branch: 
     step_2-each_form_in_seperated_page branch, 
-    solves 1 specific bad UX design - placing all forms seperated by group logic, 
-    into seperated pages/modules.
+    solves 1 specific bad UX design - placing all forms separated by group logic, 
+    into separated pages/modules.
 
 ## Design impact: 
     We already know from the first branch about the problem with many forms grouped in 1 big form. 
@@ -17,7 +17,7 @@
     for example: name, city and address are all grouped under personal info. 
     Credit card info is grouped under payment module, 
     and pizza details such as dough and toppings are grouped under pizza details or order details, 
-    this seperation of logic makes the user, 
+    this separation of logic makes the user, 
     to scan the page and assess how much time it will take him to complete the task, 
     by giving him a short form each time, he will say: "ok this look pretty short and make sense, 
     it will take me a few seconds". 
