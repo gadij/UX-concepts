@@ -1,21 +1,28 @@
-# UX Principles
+# UX Concepts
     Create a pizza ordering app in order to demonstrate good UX design vs. bad UX design.
     This only supports small display
 
 ## Previous branch: 
-    User had to write he`s information details, each time he logged in.
+    User had to login to the app, and chose his usual pizza order every time from scratch,
+    dough, toppings etc.
 
 ## This branch: 
     step_7-one_click_order branch,
-    simply tries to prevent the user of retyping the same fields over and over when logged in,
-    each time,
+    after user logged in to the app, 
+    the app askes the user if he wants to order his usual order,
+    it takes into consideration that the user ordered the same order many times, 
+    thereby this is his favorite order.
     
 ## Design impact: 
-    Today users are much less patient, and tend to get annoyed very fast,
-    when a user knows that he is logged in, he expect the app, to know its him, 
-    since he already typed in the user name and password, if the app knows its him,
-    why it demands him to insert the same info again every time he logged in,
-    by remebering the info the user entered, this concept decrease the amount of time,
-    the user spend in retyping everything again, and it makes him much less annoyed,
-    this will prevent him to throw away the app, and move the a better one,
-    one that saves him time and mental stress.  
+    The idea is very simple, as a user I want to do as much less as possible,
+    and I dont want to give any unnecessary information about me.
+    If I already agreed to provide info about myself, and logged in to a pizza ordering app,
+    I expect the app to know me (obviously after log in), to know where do I usualy order to (my address),
+    and more importantly, my usual order,
+    it really raises the stress level and decrease the patience level of the user when he has to do manual,
+    repetitive steps over and over, for the same result, getting the same pizza,
+    this is solved by profiling and saving the most common orders of the user,
+    once he is logged in, this data is pulled and suggested to him, 
+    he is able to order his pizza with 2 clicks, instead of going though all the process again and again.
+    It is very common this days, the patience level of the users is very low, if your app is a bit slow,
+    if you are causing the user to repetitively insert the same data over and over 
