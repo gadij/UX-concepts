@@ -14,5 +14,8 @@
     Research show that user scan pages first to understand,
     the time and effort that will take him to finish the task in hand, 
     thus when user sees a big, long and complex form, 
-    he will feel irritated or annoyed by it,
-    and will probably close the app and move to another, more friendly app.
+    he will feel irritated or annoyed by it, since a long and complex form,
+    without visual grouping causes the user to assess the task of filling the entire form,
+    as a long and time consuming task, 
+    thereby will have a bad experience right from the start or even worse, 
+    close the app and move to another, more friendly app.
