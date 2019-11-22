@@ -13,7 +13,7 @@
     preventing the user from making mistakes in typing a password, 
     but adding a small and significant change - 
     instead of placeing 2 inputs and making the user typing the same password twice, 
-    which can be a little annoying, 
+    which can be a little annoying and causing the user performing unnecessary work twice, 
     placing only 1 input for typing the password only once, but adding a toggle button, 
     which enabled the user to reveal or hide the password he typed in. 
     This gives the user control to hide the password he typed from curious by standards, 
