@@ -23,6 +23,4 @@
     repetitive steps over and over, for the same result, getting the same pizza,
     this is solved by profiling and saving the most common orders of the user,
     once he is logged in, this data is pulled and suggested to him, 
-    he is able to order his pizza with 2 clicks, instead of going though all the process again and again.
-    It is very common this days, the patience level of the users is very low, if your app is a bit slow,
-    if you are causing the user to repetitively insert the same data over and over 
+    he is able to order his pizza with 2 clicks, instead of going through all the process again and again.
